@@ -15,7 +15,7 @@ def peliculas_idioma(idioma:str):
 
 @app.get("/pelicula/{pelicula}")
 def peliculas_duración(pelicula:str):
-    df = pd.read_csv('../clean_data/movies.csv')
+    df = pd.read_csv('clean_data/movies.csv')
     row = df[df.title == pelicula]
     duracion = row.runtime[0]
     anio = row.release_year[0]
@@ -23,9 +23,9 @@ def peliculas_duración(pelicula:str):
 
 @app.get("/franquicia/{franquicia}")
 def franquicia(franquicia:str):
-    df = pd.read_csv('../clean_data/franquicias.csv')
-    dfx = pd.read_csv('../clean_data/franq_movies.csv')
-    dfy = pd.read_csv('../clean_data/movies.csv')
+    df = pd.read_csv('clean_data/franquicias.csv')
+    dfx = pd.read_csv('clean_data/franq_movies.csv')
+    dfy = pd.read_csv('clean_data/movies.csv')
     df = df[df.franquicia == franquicia]
     df = df.merge(dfx)[['id_peli','franquicia']]
     df = df.merge(dfy)[['title','franquicia','revenue','budget']]
@@ -37,8 +37,8 @@ def franquicia(franquicia:str):
 
 @app.get("/pais/{pais}")
 def peliculas_pais(pais:str):
-    df = pd.read_csv('../clean_data/paises.csv')
-    dfx = pd.read_csv('../clean_data/pais_movies.csv')
+    df = pd.read_csv('clean_data/paises.csv')
+    dfx = pd.read_csv('clean_data/pais_movies.csv')
     df = df[df.pais == pais]
     df = df.merge(dfx)[['id_peli']]
     peliculas = len(df)
@@ -46,9 +46,9 @@ def peliculas_pais(pais:str):
 
 @app.get("/productora/{productora}")
 def productoras_exitosas(productora:str):
-    df = pd.read_csv('../clean_data/productoras.csv')
-    dfx = pd.read_csv('../clean_data/prod_movies.csv')
-    dfy = pd.read_csv('../clean_data/movies.csv')
+    df = pd.read_csv('clean_data/productoras.csv')
+    dfx = pd.read_csv('clean_data/prod_movies.csv')
+    dfy = pd.read_csv('clean_data/movies.csv')
     df = df[df.productora == productora]
     df = df.merge(dfx)[['id_peli','productora']]
     df = df.merge(dfy)[['productora','revenue']]
@@ -58,9 +58,9 @@ def productoras_exitosas(productora:str):
 
 @app.get("/director/{director}")
 def get_director(director:str):
-    df = pd.read_csv('../clean_data/directores.csv')
-    dfx = pd.read_csv('../clean_data/dir_movies.csv')
-    dfy = pd.read_csv('../clean_data/movies.csv')
+    df = pd.read_csv('clean_data/directores.csv')
+    dfx = pd.read_csv('clean_data/dir_movies.csv')
+    dfy = pd.read_csv('clean_data/movies.csv')
     df = df[df.director == director]
     df = df.merge(dfx)[['id_peli','director']]
     df = df.merge(dfy)[['title','release_date','revenue','budget','return']]
