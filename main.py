@@ -9,7 +9,7 @@ def saludo():
 
 @app.get("/idioma/{idioma}")
 def peliculas_idioma(idioma:str):
-    df = pd.read_csv('../clean_data/movies.csv')
+    df = pd.read_csv('clean_data/movies.csv')
     df = df[df.original_language == idioma]
     return {"La cantidad de películas producidas originalmente en":f"{idioma}", "son": f"{len(df)}"}
 
