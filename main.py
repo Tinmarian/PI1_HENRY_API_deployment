@@ -17,8 +17,8 @@ def peliculas_idioma(idioma:str):
 def peliculas_duración(pelicula:str):
     df = pd.read_csv('clean_data/movies.csv')
     row = df[df.title == pelicula]
-    duracion = row.runtime[0]
-    anio = row.release_year[0]
+    duracion = row.runtime.item()
+    anio = row.release_year.item()
     return {"La pelicula" : f"{pelicula}", "tiene una duración de" : f"{duracion} minutos", "Año": f"{anio}"}
 
 @app.get("/franquicia/{franquicia}")
