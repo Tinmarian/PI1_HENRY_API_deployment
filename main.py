@@ -14,10 +14,10 @@ def peliculas_idioma(idioma:str):
     dfx = pd.read_csv('clean_data/lenguajes.csv')
     dfy = pd.read_csv('clean_data/leng_movies.csv')
     df = df[df.original_language == idioma]
-    df = df.merge(dfy)
-    df = df.merge(dfx)
+    df = df.merge(dfy,how='left')
+    df = df.merge(dfx,how='left')
     abrev = idioma
-    idioma = df.lenguaje.item()
+    idioma = df.lenguaje[0]
     return {"La cantidad de películas producidas originalmente en":f"{idioma}" f"{abrev}", "son": f"{len(df)}"}
 
 @app.get("/pelicula/{pelicula}")
@@ -50,7 +50,7 @@ def peliculas_pais(pais:str):
     df = pd.read_csv('clean_data/paises.csv')
     dfx = pd.read_csv('clean_data/pais_movies.csv')
     df = df[df.pais == pais]
-    df = df.merge(dfx)[['id_peli']]
+    df = df.merge(dfx,how='left')['id_peli']
     peliculas = len(df)
     return {"Se producieron" : f"{peliculas} peliculas", "en el pais" : f"{pais}"}
 
@@ -91,7 +91,7 @@ def recomendacion(pelicula):
         lista = list(dfx[dfx.id_peli == pelicula].idx_recommend)
         pelicula = dfx.title[dfx.id_peli == pelicula][:1].item()
     else:
-        return {"Debes introducir un valor entero (int) que pertenezca al id de alguna película" : "O el nombre de una película en inglés (str)"}
+        return {"Debes introducir un valor entero (int) que pertenezca al id de alguna película" : "O el nombre de una película en inglés (str)", "Tipo de dato: " : f'{type(pelicula)}'}
 
     recomendacion = df.loc[lista][['id_peli', 'title']]
     recomendacion.columns = ['id_peli','recomendaciones']
