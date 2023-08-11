@@ -91,7 +91,7 @@ def recomendacion(pelicula):
         lista = list(dfx[dfx.id_peli == pelicula].idx_recommend)
         pelicula = dfx.title[dfx.id_peli == pelicula][:1].item()
     else:
-        return {'Debes introducir un valor entero (int) que pertenezca al id de alguna película' : 'O el nombre de una película en inglés (str)'}
+        return {"Debes introducir un valor entero (int) que pertenezca al id de alguna película" : "O el nombre de una película en inglés (str)"}
 
     recomendacion = df.loc[lista][['id_peli', 'title']]
     recomendacion.columns = ['id_peli','recomendaciones']
