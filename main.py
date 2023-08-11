@@ -81,7 +81,7 @@ def get_director(director:str):
     return {f"El director {director}" : f"tiene un éxito medido a través del retorno de todas sus películas de {retorno}.", "Las películas que dirigió son:" : f"{listas}", "La ecuación que se utilizó para obtener el retorno es:" : "df.revenue.sum()/df.budget.sum(), donde 'df' es el dataframe filtrado por el director seleccionado."}
 
 @app.get("/recomendacion/{pelicula}")
-def recomendacion(pelicula:[str,int]):
+def recomendacion(pelicula):
     df = pd.read_csv('clean_data/movies_model.csv')
     dfx = pd.read_csv('clean_data/recommended_movies.csv')
     if type(pelicula) == str:
@@ -90,6 +90,8 @@ def recomendacion(pelicula:[str,int]):
     elif type(pelicula) == int:
         lista = list(dfx[dfx.id_peli == pelicula].idx_recommend)
         pelicula = dfx.title[dfx.id_peli == pelicula][:1].item()
+    else:
+        return {'Debes introducir un valor entero (int) que pertenezca al id de alguna película' : 'O el nombre de una película en inglés (str)'}
 
     recomendacion = df.loc[lista][['id_peli', 'title']]
     recomendacion.columns = ['id_peli','recomendaciones']
