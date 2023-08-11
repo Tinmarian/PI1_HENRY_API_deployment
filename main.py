@@ -97,11 +97,11 @@ def recomendacion(pelicula:[str,int]):
 
     if not recomendacion.empty:
         return {
-            'Ingresaste la película: ': f'{pelicula}',
-            'Las recomendaciones son: ': f'1.- [{recomendacion.recomendaciones[:1].item()}]; 2.- [{recomendacion.recomendaciones[1:2].item()}]; 3.- [{recomendacion.recomendaciones[2:3].item()}]; 4.- [{recomendacion.recomendaciones[3:4].item()}]; 5.- [{recomendacion.recomendaciones[4:5].item()}]',
+            "Ingresaste la película: ": f"{pelicula}",
+            "Las recomendaciones son: ": f"1.- [{recomendacion.recomendaciones[:1].item()}]; 2.- [{recomendacion.recomendaciones[1:2].item()}]; 3.- [{recomendacion.recomendaciones[2:3].item()}]; 4.- [{recomendacion.recomendaciones[3:4].item()}]; 5.- [{recomendacion.recomendaciones[4:5].item()}]",
         }
     else: 
         return {
-            'Dentro del dataset no se encuentra la película: ' : f'{pelicula}', 
-            'Recuerda que, debido a los procesos de limpieza y preprocesamiento, solo contamos con: ' : f'{len(df)} películas', 
-            'de un total de: ' : f'{len(dfy)} películas.'}
+            "Dentro del dataset no se encuentra la película: " : f"{pelicula}", 
+            "Recuerda que, debido a los procesos de limpieza y preprocesamiento, solo contamos con: " : f"{len(df)} películas", 
+            "de un total de: " : f"{len(dfy)} películas."}
