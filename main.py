@@ -81,6 +81,11 @@ def get_director(director:str):
 
 @app.get("/recomendacion/{pelicula}")
 def recomendacion(pelicula):
+# The `try` block is used to handle exceptions or errors that may occur during the execution of the
+# code. In this case, the code is trying to convert the `pelicula` variable to an integer using the
+# `int()` function. If the conversion is successful, it means that `pelicula` is an integer and the
+# code continues executing normally. However, if the conversion raises a `ValueError` (i.e.,
+# `pelicula` is not a valid integer), the code jumps to the `except` block to handle the exception.
     try:
         pelicula = int(pelicula)
     except ValueError:
