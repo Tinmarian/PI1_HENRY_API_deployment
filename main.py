@@ -18,7 +18,7 @@ def peliculas_idioma(idioma:str):
     df = df.merge(dfx,how='left')
     abrev = idioma
     idioma = df.lenguaje[0]
-    return {"La cantidad de películas producidas originalmente en":f"{idioma}" f"{abrev}", "son": f"{len(df)}"}
+    return {"La cantidad de películas producidas originalmente en":f"{idioma} ({abrev})", "son": f"{len(df)}"}
 
 @app.get("/pelicula/{pelicula}")
 def peliculas_duración(pelicula:str):
@@ -50,7 +50,7 @@ def peliculas_pais(pais:str):
     df = pd.read_csv('clean_data/paises.csv')
     dfx = pd.read_csv('clean_data/pais_movies.csv')
     df = df[df.pais == pais]
-    df = df.merge(dfx,how='left')['id_peli']
+    df = df.merge(dfx,how='right')['id_peli']
     peliculas = len(df)
     return {"Se producieron" : f"{peliculas} peliculas", "en el pais" : f"{pais}"}
 
@@ -83,7 +83,7 @@ def get_director(director:str):
 @app.get("/recomendacion/{pelicula}")
 def recomendacion(pelicula):
     try:
-        int(pelicula)
+        pelicula = int(pelicula)
     except ValueError:
         pass
     df = pd.read_csv('clean_data/movies_model.csv')
