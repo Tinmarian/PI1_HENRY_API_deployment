@@ -103,5 +103,5 @@ def recomendacion(pelicula:[str,int]):
         return {
             'Dentro del dataset no se encuentra la película: ' : f'{pelicula}', 
             'Recuerda que, debido a los procesos de limpieza y preprocesamiento, solo contamos con: ' : f'{len(df)} películas', 
-            'de un total de: ' : f'{len(pd.read_csv('clean_data/movies_dataset.csv'))} películas.'
+            'de un total de: ' : f'{len(pd.read_csv('clean_data/movies_dataset.csv'))} películas.',
             }
