@@ -49,9 +49,8 @@ def peliculas_pais(pais:str):
     pais = pais.title()
     df = pd.read_csv('clean_data/paises.csv')
     dfx = pd.read_csv('clean_data/pais_movies.csv')
-    df = df[df.pais == pais]
-    df = df.merge(dfx,how='right')[df.pais == pais][['id_peli']]
-    peliculas = len(df)
+    df = df.merge(dfx,how='right')
+    peliculas = len(df[df.pais == pais])
     return {"Se producieron" : f"{peliculas} peliculas", "en el pais" : f"{pais}"}
 
 @app.get("/productora/{productora}")
