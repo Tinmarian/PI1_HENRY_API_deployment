@@ -50,7 +50,7 @@ def peliculas_pais(pais:str):
     df = pd.read_csv('clean_data/paises.csv')
     dfx = pd.read_csv('clean_data/pais_movies.csv')
     df = df[df.pais == pais]
-    df = df.merge(dfx,how='right')['id_peli']
+    df = df.merge(dfx,how='right')[df.pais == pais][['id_peli']]
     peliculas = len(df)
     return {"Se producieron" : f"{peliculas} peliculas", "en el pais" : f"{pais}"}
 
@@ -95,7 +95,7 @@ def recomendacion(pelicula):
         lista = list(dfx[dfx.id_peli == pelicula].idx_recommend)
         pelicula = dfx.title[dfx.id_peli == pelicula][:1].item()
     else:
-        return {"Debes introducir un valor entero (int) que pertenezca al id de alguna película" : "O el nombre de una película en inglés (str)", "Tipo de dato: " : f'{type(pelicula)}'}
+        return {"Debes introducir un valor entero (int) que pertenezca al id de alguna película" : "O el nombre de una película en inglés (str)"}
 
     recomendacion = df.loc[lista][['id_peli', 'title']]
     recomendacion.columns = ['id_peli','recomendaciones']
