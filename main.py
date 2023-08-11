@@ -82,6 +82,10 @@ def get_director(director:str):
 
 @app.get("/recomendacion/{pelicula}")
 def recomendacion(pelicula):
+    try:
+        int(pelicula)
+    except ValueError:
+        pass
     df = pd.read_csv('clean_data/movies_model.csv')
     dfx = pd.read_csv('clean_data/recommended_movies.csv')
     if type(pelicula) == str:
